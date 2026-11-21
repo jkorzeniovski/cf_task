@@ -8,7 +8,7 @@ def add_virtual_column(df: pd.DataFrame, role: str, new_column: str) -> pd.DataF
     if not re.fullmatch(r"[A-Za-z_]+", new_column): #validation for new column name - only letters and _ 
         return pd.DataFrame([])
 
-    if not re.fullmatch(r"\s*[A-Za-z_]+\s*[+\-*]\s*([A-Za-z_]+\s*)*", role): #validation for role - only letters, _+-* and spaces before, after and between
+    if not re.fullmatch(r"\s*[A-Za-z_]+\s*([+\-*]\s*[A-Za-z_]+\s*)+", role): #validation for role - column names joined by one or more +-* operators, spaces allowed
         return pd.DataFrame([])
 
     labels = re.findall(r"[A-Za-z_]+", role) #checking if labels are actual names of columns in df
